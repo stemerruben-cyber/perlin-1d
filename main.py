@@ -46,7 +46,7 @@ segments = 40
 interpolation = Interp.COSINE
 interp_iter = itertools.cycle((Interp.LINEAR, Interp.CUBIC, Interp.COSINE))
 offset = 0
-offset_speed = 2
+offset_speed = 1
 show_marks = False
 
 running = True
@@ -68,9 +68,9 @@ while running:
             elif event.key == pygame.K_l:
                 octaves -= 1
             elif event.key == pygame.K_RIGHT:
-                offset_speed += 2
+                offset_speed += 0.5
             elif event.key == pygame.K_LEFT:
-                offset_speed -= 2
+                offset_speed -= 0.5
             elif event.key == pygame.K_UP:
                 segments += 10
             elif event.key == pygame.K_DOWN:
@@ -116,6 +116,8 @@ while running:
     screen.blit(text_surface, dest=(WIDTH - text_surface.get_width() - 5, HEIGHT - FONT_SIZE))
 
     points = list()
+    if segments == 0:
+        segments = 10
     norma = WIDTH / segments
     for pix_x in range(WIDTH):
         # convert pixel position to real value
